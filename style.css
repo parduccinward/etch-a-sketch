@@ -7,15 +7,24 @@ body {
 }
 
 .new-grid-btn{
+    padding: 10px 20px;
+    color: #009B7C;
+    border-color: #009B7C;
+    border-radius: 8px;
+    background-color: white;
+}
 
+.new-grid-btn:hover{
+    background-color: #009B7C;
+    color:white;
 }
 
 .grid-container{
     display: flex;
     justify-content:center;
     align-items:center;
-    width: 900px;
-    height: 900px;
+    width: 800px;
+    height: 800px;
 }
 
 .column-container{
