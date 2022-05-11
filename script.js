@@ -1,19 +1,22 @@
+let defaultGridSize = 16;
 
-addSquaresToView();
+addSquaresToView(defaultGridSize);
 addHoverToSquares();
+addNewGridButton();
 
-function addSquaresToView(){
+
+function addSquaresToView(gridSize){
     const mainContainer = document.querySelector(".grid-container");
     let columnContainer = document.createElement("div");
     let square = document.createElement("div");
 
-    generateSquares(mainContainer, columnContainer, square);
+    generateSquares(mainContainer, columnContainer, square, gridSize);
 }
 
-function generateSquares(mainContainer, columnContainer, square){
-    for (let i = 0; i < 16; i++){
+function generateSquares(mainContainer, columnContainer, square, gridSize){
+    for (let i = 0; i < gridSize; i++){
         columnContainer = createNewColumn(columnContainer);
-        for (let j = 0; j < 16; j++){
+        for (let j = 0; j < gridSize; j++){
             square = generateSquareAtColumn(square,columnContainer);
         }
         generateColumnAtContainer(columnContainer,mainContainer);
@@ -59,6 +62,43 @@ function hoverElement(e){
     e.target.classList.add("hover");  
 }
 
+function addNewGridButton(){
+    const btn = document.querySelector(".new-grid-btn");
+    btn.addEventListener("click",createNewGrid);
+}
 
+function createNewGrid(){
+    let newGrid = showNewGridPrompt();
+    if (checkGridRange(newGrid) === false){
+        alert("Please select a valid range grid!");
+        createNewGrid();
+    }
+    addNewGridToWindow(newGrid);
+}
 
+function showNewGridPrompt(){
+    return Number(prompt("What is the grid size? (Must be between 2 and 99)"));
+}
 
+function checkGridRange(newGrid){
+    return (newGrid<=1 || newGrid>=100) ? false : true;
+}
+
+function addNewGridToWindow(newGrid){
+    deleteOldGrid();
+    addSquaresToView(newGrid);
+    addHoverToSquares();
+}
+
+function deleteOldGrid(){
+    const oldGrid = document.querySelector(".grid-container");
+    oldGrid.remove();
+    restartGrid();
+}
+
+function restartGrid(){
+    const gridContainer = document.createElement("div");
+    gridContainer.classList.add("grid-container");
+    const body = document.querySelector("body");
+    body.appendChild(gridContainer);
+}
