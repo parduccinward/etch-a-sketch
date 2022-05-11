@@ -1,35 +1,45 @@
 
-// column j row i
-// row creation is a container. each column is a div. each
-// append row-container to grid-container
-
 addSquaresToView();
 
 function addSquaresToView(){
     const mainContainer = document.querySelector(".grid-container");
-    let rowContainer = document.createElement("div");
+    let columnContainer = document.createElement("div");
     let square = document.createElement("div");
 
+    generateSquares(mainContainer, columnContainer, square);
+}
+
+function generateSquares(mainContainer, columnContainer, square){
     for (let i = 0; i < 16; i++){
-        rowContainer = document.createElement("div");
-        rowContainer.classList.add("row-container");
+        columnContainer = createNewColumn(columnContainer);
         for (let j = 0; j < 16; j++){
-            square = generateSquareAtRow(square,j,rowContainer);
+            square = generateSquareAtColumn(square,columnContainer);
         }
-        mainContainer.append(rowContainer);
+        generateColumnAtContainer(columnContainer,mainContainer);
     }
 }
 
-function generateSquareAtRow(square,j,rowContainer){
-    createSquareContent(square,j);
-    rowContainer.appendChild(square);
+function generateSquareAtColumn(square,columnContainer){
+    createSquareContent(square);
+    columnContainer.appendChild(square);
     return square = createNewSquare(square);
 }
 
+function generateColumnAtContainer(columnContainer,mainContainer){
+    createColumnContent(columnContainer);
+    mainContainer.appendChild(columnContainer);
+}
 
-function createSquareContent(square,j){
+function createColumnContent(columnContainer){
+    columnContainer.classList.add("column-container");
+}
+
+function createSquareContent(square){
     square.classList.add("square");
-    square.textContent =j;
+}
+
+function createNewColumn(columnContainer){
+    return columnContainer = document.createElement("div");
 }
 
 function createNewSquare(square){
