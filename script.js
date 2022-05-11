@@ -1,5 +1,6 @@
 
 addSquaresToView();
+addHoverToSquares();
 
 function addSquaresToView(){
     const mainContainer = document.querySelector(".grid-container");
@@ -45,3 +46,19 @@ function createNewColumn(columnContainer){
 function createNewSquare(square){
     return square = document.createElement("div");
 }
+
+
+function addHoverToSquares(){
+    const squares = document.querySelectorAll(".square");
+    squares.forEach((square) => {
+        square.addEventListener("mouseover",hoverElement)
+    });
+}
+
+function hoverElement(e){
+    e.target.classList.add("hover");  
+}
+
+
+
+
