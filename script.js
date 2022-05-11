@@ -72,8 +72,9 @@ function createNewGrid(){
     if (checkGridRange(newGrid) === false){
         alert("Please select a valid range grid!");
         createNewGrid();
+    }else{
+        addNewGridToWindow(newGrid);
     }
-    addNewGridToWindow(newGrid);
 }
 
 function showNewGridPrompt(){
